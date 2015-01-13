@@ -1,0 +1,7 @@
+com/example/helloworld/HelloWorldApplication.class
+com/example/helloworld/HelloWorldApplication$1.class
+com/example/helloworld/core/Template.class
+com/example/helloworld/core/Saying.class
+com/example/helloworld/HelloWorldConfiguration.class
+com/example/helloworld/health/TemplateHealthCheck.class
+com/example/helloworld/resources/HelloWorldResource.class
