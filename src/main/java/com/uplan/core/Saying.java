@@ -1,4 +1,4 @@
-package com.example.helloworld.core;
+package com.uplan.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;

@@ -9,13 +9,13 @@ database:
   driverClass: com.mysql.jdbc.Driver
 
   # the username
-  user: root
+  user: optimus
 
   # the password
-  password: password
+  password: optimus
 
   # the JDBC URL
-  url: jdbc:mysql://localhost:3306/carcosa?createDatabaseIfNotExist=true
+  url: jdbc:mysql://localhost:3306/optimus?createDatabaseIfNotExist=true
 
 # use the simple server factory if you only want to run on a single port
 #server:

@@ -72,7 +72,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+                  <mainClass>com.uplan.service.UPlanApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

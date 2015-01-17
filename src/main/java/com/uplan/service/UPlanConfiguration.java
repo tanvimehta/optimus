@@ -1,15 +1,17 @@
-package com.example.helloworld;
+package com.uplan.service;
 
-import com.example.helloworld.core.Template;
+import com.uplan.core.Template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;
+import io.dropwizard.db.DatabaseConfiguration;
+
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-public class HelloWorldConfiguration extends Configuration {
+public class UPlanConfiguration extends Configuration {
     @NotEmpty
     private String template;
 

@@ -23,6 +23,42 @@
             <column name="entrance_y" type="bigint"/>
         </createTable>
 
+        <createTable tableName="users">
+            <column name="user_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reg_id" type="varchar(255)"/>
+            <column name="valid" type="bigint"/>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="password" type="varchar(128)"/>
+            <column name="token" type="varchar(128)"/>
+        </createTable>
+
+        <createTable tableName="reset_password_token">
+            <column name="reset_password_token_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="varchar(64)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="token" type="varchar(64)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="friends">
+            <column name="user_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="friend_id" type="bigint">
+                <constraints unique="false" nullable="false"/>
+            </column>
+        </createTable>
+
         <loadData encoding="UTF-8" file="ba_3.csv" tableName="resources"/>
 
     </changeSet>
