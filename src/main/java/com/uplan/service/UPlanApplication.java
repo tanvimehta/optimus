@@ -1,12 +1,14 @@
 package com.uplan.service;
 
-import com.uplan.core.ResetPasswordToken;
-import com.uplan.core.Template;
-import com.uplan.core.User;
+import com.uplan.core.*;
+import com.uplan.db.FriendDAO;
+import com.uplan.db.LocationDAO;
 import com.uplan.db.ResetPasswordTokenDAO;
 import com.uplan.db.UserDAO;
 import com.uplan.health.TemplateHealthCheck;
+import com.uplan.resources.FriendResource;
 import com.uplan.resources.HelloWorldResource;
+import com.uplan.resources.LocationResource;
 import com.uplan.resources.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -24,7 +26,9 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
 
     private final HibernateBundle<UPlanConfiguration> hibernate = new HibernateBundle<UPlanConfiguration>(
             User.class,
-            ResetPasswordToken.class) {
+            ResetPasswordToken.class,
+            Friend.class,
+            Location.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(UPlanConfiguration uPlanConfiguration) {
             return uPlanConfiguration.getDataSourceFactory();
@@ -49,10 +53,14 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
         final Template template = configuration.buildTemplate();
         final UserDAO userDAO = new UserDAO(hibernate.getSessionFactory());
         final ResetPasswordTokenDAO resetPasswordTokenDAO = new ResetPasswordTokenDAO(hibernate.getSessionFactory());
+        final FriendDAO friendDAO = new FriendDAO(hibernate.getSessionFactory());
+        final LocationDAO locationDAO = new LocationDAO(hibernate.getSessionFactory());
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
         environment.jersey().register(new HelloWorldResource(template));
         environment.jersey().register(new UserResource(userDAO, resetPasswordTokenDAO));
+        environment.jersey().register(new FriendResource(userDAO, friendDAO));
+        environment.jersey().register(new LocationResource(userDAO, locationDAO));
 
     }
 }

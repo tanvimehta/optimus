@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * Created by tanvimehta on 15-01-16.
  */
-@Path("/user")
+@Path("/friend")
 @Produces(MediaType.APPLICATION_JSON)
 public class FriendResource {
     private UserDAO userDAO;
