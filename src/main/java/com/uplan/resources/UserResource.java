@@ -59,7 +59,7 @@ public class UserResource {
             user.setToken(token);
             userOptional = Optional.fromNullable(userDAO.persistUser(user));
             EmailSender.sendEmail(email, "Registration Confirmation", "Welcome to the UPlan! Please click on this " +
-                    "link to successfully register! - http://localhost:8080/user/confirm?email=" + email + "&token=" + token);
+                    "link to successfully register! - http://104.236.85.199:8080/user/confirm?email=" + email + "&token=" + token);
         }
         return userOptional;
     }

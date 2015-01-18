@@ -9,6 +9,8 @@ import com.uplan.db.LocationDAO;
 import com.uplan.db.UserDAO;
 import com.uplan.service.POST2GCM;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,6 +27,7 @@ public class LocationResource {
     private UserDAO userDAO;
     private LocationDAO locationDAO;
     private final String API_KEY = "AIzaSyAm43w75goT3wWIxFoxA1i7MdsV_Q8CGSY";
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocationResource.class);
 
     public LocationResource(UserDAO userDAO, LocationDAO locationDAO) {
         this.userDAO = userDAO;
@@ -89,7 +92,7 @@ public class LocationResource {
     @Timed
     @UnitOfWork
     @Path("putLocation")
-    public boolean locateFriend(@QueryParam("friendEmail") String friendEmail,
+    public boolean putLocation(@QueryParam("friendEmail") String friendEmail,
                                 @QueryParam("building") String building,
                                 @QueryParam("floor") String floor,
                                 @QueryParam("x") String xCoord,
@@ -104,7 +107,6 @@ public class LocationResource {
         long userId = friend.getUser_id();
         if (userId != 0 && locationDAO.getLocation(userId) != null) {
             locationDAO.updateLocation(Long.parseLong(floor), building, Long.parseLong(xCoord), Long.parseLong(yCoord), userId);
-            return true;
         } else if (userId != 0){
             Location location = new Location();
             location.setFloor(Long.parseLong(floor));
@@ -113,11 +115,9 @@ public class LocationResource {
             location.setX_coordinate(Long.parseLong(xCoord));
             location.setY_coordinate(Long.parseLong(yCoord));
             locationDAO.persistLocation(location);
-            return true;
         }
 
         POST2GCM.post(API_KEY, content);
-
         return true;
     }
 }
