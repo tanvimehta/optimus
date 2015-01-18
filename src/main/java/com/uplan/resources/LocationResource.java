@@ -74,7 +74,7 @@ public class LocationResource {
     @Timed
     @UnitOfWork
     @Path("locateFriend")
-    public boolean locateFriend(@QueryParam("userEmail") String userEmail,
+    public Location locateFriend(@QueryParam("userEmail") String userEmail,
             @QueryParam("friendEmail") String friendEmail) {
         User friend = userDAO.getUserByEmail(friendEmail);
 
@@ -85,7 +85,13 @@ public class LocationResource {
 
         POST2GCM.post(API_KEY, content);
 
-        return true;
+        // Remove this once the request handling is fixed
+        Location location = new Location();
+        location.setBuilding("Bahen");
+        location.setFloor(1);
+        location.setX_coordinate(123);
+        location.setY_coordinate(123);
+        return location;
     }
 
     @GET
