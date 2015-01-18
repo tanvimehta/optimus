@@ -107,7 +107,7 @@ public class UserResource {
             resetPasswordToken.setEmail(email);
             resetPasswordToken.setToken(token);
             resetPasswordTokenDAO.persistResetToken(resetPasswordToken);
-            EmailSender.sendEmail(email, "Password Reset", "http://localhost:8080/user/email=" + email + "&token=" + token);
+            EmailSender.sendEmail(email, "Password Reset", "http://104.236.85.199:8080/user/email=" + email + "&token=" + token);
             return true;
         }
         return false;
