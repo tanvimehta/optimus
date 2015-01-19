@@ -1,17 +1,17 @@
-package com.uplan.neo4j;
+// package com.uplan.neo4j;
 
-import org.springframework.data.neo4j.annotation.GraphId;
+// import org.springframework.data.neo4j.annotation.GraphId;
 
-/**
- * Created by tanvimehta on 15-01-18.
- */
-public class LocationNode {
+// /**
+//  * Created by tanvimehta on 15-01-18.
+//  */
+// public class LocationNode {
 
-    @GraphId Long id;
-    public String resourceType;
+//     @GraphId Long id;
+//     public String resourceType;
 
 
-    public LocationNode() {}
-    public LocationNode()
+//     public LocationNode() {}
+//     public LocationNode()
 
-}
+// }
