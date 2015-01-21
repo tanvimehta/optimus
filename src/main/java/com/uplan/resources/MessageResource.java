@@ -25,6 +25,8 @@ import javax.ws.rs.core.MediaType;
 public class MessageResource {
 
     private final String DELIMITER = ";";
+    private final String SPACE = " ";
+
     private UserDAO userDAO;
     private final String API_KEY = "AIzaSyAm43w75goT3wWIxFoxA1i7MdsV_Q8CGSY";
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationResource.class);
@@ -44,7 +46,7 @@ public class MessageResource {
 
         Content content = new Content();
         content.addRegId(friend.getReg_id());
-        content.createData("message", userEmail + ";" + message);
+        content.createData("message", friend.getFirstName() + SPACE + friend.getLastName() + DELIMITER + message);
 
         POST2GCM.post(API_KEY, content);
         return true;
