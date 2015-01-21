@@ -6,10 +6,7 @@ import com.uplan.db.LocationDAO;
 import com.uplan.db.ResetPasswordTokenDAO;
 import com.uplan.db.UserDAO;
 import com.uplan.health.TemplateHealthCheck;
-import com.uplan.resources.FriendResource;
-import com.uplan.resources.HelloWorldResource;
-import com.uplan.resources.LocationResource;
-import com.uplan.resources.UserResource;
+import com.uplan.resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -61,6 +58,7 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
         environment.jersey().register(new UserResource(userDAO, resetPasswordTokenDAO));
         environment.jersey().register(new FriendResource(userDAO, friendDAO));
         environment.jersey().register(new LocationResource(userDAO, locationDAO));
+        environment.jersey().register(new MessageResource(userDAO));
 
     }
 }
