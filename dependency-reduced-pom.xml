@@ -28,6 +28,10 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
@@ -101,10 +105,23 @@
       <url>http://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <repository>
-      <id>neo4j-public-repository</id>
-      <url>http://m2.neo4j.org</url>
+      <id>spring-releases</id>
+      <name>Spring Releases</name>
+      <url>https://repo.spring.io/libs-release</url>
+    </repository>
+    <repository>
+      <id>neo4j</id>
+      <name>Neo4j</name>
+      <url>http://m2.neo4j.org/</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-releases</id>
+      <name>Spring Releases</name>
+      <url>https://repo.spring.io/libs-release</url>
+    </pluginRepository>
+  </pluginRepositories>
   <dependencies>
     <dependency>
       <groupId>io.dropwizard</groupId>
