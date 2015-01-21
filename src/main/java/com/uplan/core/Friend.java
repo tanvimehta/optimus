@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by tanvimehta on 15-01-16.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "friends")
 @NamedQueries({
         @NamedQuery(
                 name = "com.uplan.core.Friend.deleteFriend",
@@ -25,6 +25,9 @@ public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long friendship_id;
+
+    @Column(name="user_id", nullable = false)
     private long user_id;
 
     @Column(name="friend_id", nullable = false)
@@ -44,5 +47,13 @@ public class Friend {
 
     public void setFriend_id(long friend_id) {
         this.friend_id = friend_id;
+    }
+
+    public long getFriendship_id() {
+        return friendship_id;
+    }
+
+    public void setFriendship_id(long friendship_id) {
+        this.friendship_id = friendship_id;
     }
 }
