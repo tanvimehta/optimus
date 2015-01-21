@@ -36,7 +36,9 @@ public class UserResource {
     public Optional<User> verifyUser(@QueryParam("password") String password,
                                      @QueryParam("email") String email,
                                      @QueryParam("regid") String regId) {
-        userDAO.setRegId(email, regId);
+        if (userDAO.getUserByEmailAndPassword(email, DigestUtils.md5Hex(password).toString()) != null) {
+            userDAO.setRegId(email, regId);
+        }
         return Optional.fromNullable(userDAO.getUserByEmailAndPassword(email, DigestUtils.md5Hex(password).toString()));
     }
 
