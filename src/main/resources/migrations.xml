@@ -81,6 +81,7 @@
         </createTable>
 
         <loadData encoding="UTF-8" file="ba_3.csv" tableName="resources"/>
+        <loadData encoding="UTF-8" file="user.csv" tableName="users"/>
 
     </changeSet>
 </databaseChangeLog>

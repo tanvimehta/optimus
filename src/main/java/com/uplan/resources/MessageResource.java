@@ -43,10 +43,11 @@ public class MessageResource {
                                  @QueryParam("friendEmail") String friendEmail,
                                  @QueryParam("message") String message) {
         User friend = userDAO.getUserByEmail(friendEmail);
+	User current = userDAO.getUserByEmail(userEmail);
 
         Content content = new Content();
         content.addRegId(friend.getReg_id());
-        content.createData("message", friend.getFirstName() + SPACE + friend.getLastName() + DELIMITER + message);
+        content.createData("message", current.getFirstName() + SPACE + current.getLastName() + DELIMITER + message);
 
         POST2GCM.post(API_KEY, content);
         return true;

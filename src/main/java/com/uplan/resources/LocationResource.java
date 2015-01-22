@@ -107,8 +107,8 @@ public class LocationResource {
 
         Content content = new Content();
         content.addRegId(friend.getReg_id());
-        content.createData("putLocation", "friendEmail=" + friendEmail + "building=" + building + "floor=" + floor +
-        "x=" + xCoord + "y" + yCoord);
+        content.createData("putLocation", "friendEmail=" + friendEmail + "&building=" + building + "&floor=" + floor +
+        "&x=" + xCoord + "&y=" + yCoord);
 
         long userId = friend.getUser_id();
         if (userId != 0 && locationDAO.getLocation(userId) != null) {
