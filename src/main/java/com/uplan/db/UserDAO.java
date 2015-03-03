@@ -50,4 +50,9 @@ public class UserDAO extends AbstractDAO<User> {
         long userId = getUserByEmail(email).getUser_id();
         namedQuery("com.uplan.core.User.setValid").setBigInteger("user_id", BigInteger.valueOf(userId)).setBigInteger("valid", BigInteger.valueOf(TRUE)).executeUpdate();
     }
+
+    public void setLocPermission(long permission, String email) {
+        long userId = getUserByEmail(email).getUser_id();
+        namedQuery("com.uplan.core.User.setLocPermission").setBigInteger("user_id", BigInteger.valueOf(userId)).setBigInteger("permission", BigInteger.valueOf(permission)).executeUpdate();
+    }
 }

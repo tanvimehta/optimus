@@ -30,7 +30,11 @@ import javax.persistence.*;
         @NamedQuery(
         name = "com.uplan.core.User.setValid",
         query = "UPDATE User user SET valid = :valid where user_id = :user_id"
-)
+        ),
+        @NamedQuery(
+                name = "com.uplan.core.User.setLocPermission",
+                query = "UPDATE User user SET loc_permission = :permission where user_id = :user_id"
+        )
 })
 public class User {
 
@@ -58,6 +62,9 @@ public class User {
 
     @Column(name="reg_id", nullable = true)
     private String reg_id;
+
+    @Column(name="loc_permission", nullable = true)
+    private boolean loc_permission;
 
     public String getToken() {
         return token;
@@ -118,5 +125,14 @@ public class User {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
+
+    public boolean isLoc_permission() {
+        return loc_permission;
+    }
+
+    public void setLoc_permission(boolean loc_permission) {
+        this.loc_permission = loc_permission;
+    }
+
 }
 

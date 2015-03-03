@@ -77,6 +77,9 @@ public class LocationResource {
     public Location locateFriend(@QueryParam("userEmail") String userEmail,
             @QueryParam("friendEmail") String friendEmail) {
         User friend = userDAO.getUserByEmail(friendEmail);
+        if (!friend.isLoc_permission()) {
+            return null;
+        }
 
         Content content = new Content();
         content.addRegId(friend.getReg_id());

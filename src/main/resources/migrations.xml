@@ -36,6 +36,7 @@
             <column name="email" type="varchar(255)"/>
             <column name="password" type="varchar(128)"/>
             <column name="token" type="varchar(128)"/>
+            <column name="loc_permission" type="bigint"/>
         </createTable>
 
         <createTable tableName="reset_password_token">
@@ -81,7 +82,8 @@
         </createTable>
 
         <loadData encoding="UTF-8" file="ba_3.csv" tableName="resources"/>
-        <loadData encoding="UTF-8" file="user.csv" tableName="users"/>
+        <loadData encoding="UTF-8" file="users.csv" tableName="users"/>
+        <loadData encoding="UTF-8" file="friends.csv" tableName="friends"/>
 
     </changeSet>
 </databaseChangeLog>

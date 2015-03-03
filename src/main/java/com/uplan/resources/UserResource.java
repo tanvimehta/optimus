@@ -59,6 +59,7 @@ public class UserResource {
             user.setPassword(DigestUtils.md5Hex(password));
             String token = UUID.randomUUID().toString();
             user.setToken(token);
+            user.setLoc_permission(true);
             userOptional = Optional.fromNullable(userDAO.persistUser(user));
             EmailSender.sendEmail(email, "Registration Confirmation", "Welcome to the UPlan! Please click on this " +
                     "link to successfully register! - http://104.236.85.199:8080/user/confirm?email=" + email + "&token=" + token);
@@ -160,6 +161,55 @@ public class UserResource {
             return true;
         }
         return false;
+    }
+
+    @GET
+    @Timed
+    @UnitOfWork
+    @Path("hideLocation")
+    public boolean hideLocation(@QueryParam("password") String password,
+                              @QueryParam("email") String email) {
+
+        User usr = userDAO.getUserByEmailAndPassword(email, DigestUtils.md5Hex(password).toString());
+        if (usr != null) {
+            userDAO.setLocPermission(0, email);
+            return true;
+        }
+        return false;
+    }
+
+    @GET
+    @Timed
+    @UnitOfWork
+    @Path("showLocation")
+    public boolean showLocation(@QueryParam("password") String password,
+                                @QueryParam("email") String email) {
+
+        User usr = userDAO.getUserByEmailAndPassword(email, DigestUtils.md5Hex(password).toString());
+        if (usr != null) {
+            userDAO.setLocPermission(1, email);
+            return true;
+        }
+        return false;
+    }
+
+    @GET
+    @Timed
+    @UnitOfWork
+    @Path("getPermission")
+    public String getPermission(@QueryParam("password") String password,
+                                @QueryParam("email") String email) {
+        System.out.println(email + " " + password);
+        User usr = userDAO.getUserByEmailAndPassword(email, DigestUtils.md5Hex(password).toString());
+        if (usr != null) {
+
+            if (usr.isLoc_permission()) {
+                return "Show";
+            } else {
+                return "Hide";
+            }
+        }
+        return "Invalid Credentials";
     }
 }
 
