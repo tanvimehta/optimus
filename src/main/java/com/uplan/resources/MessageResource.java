@@ -2,14 +2,10 @@ package com.uplan.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.uplan.core.Content;
-import com.uplan.core.Location;
 import com.uplan.core.User;
-import com.uplan.db.LocationDAO;
 import com.uplan.db.UserDAO;
 import com.uplan.service.POST2GCM;
 import io.dropwizard.hibernate.UnitOfWork;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,7 +25,6 @@ public class MessageResource {
 
     private UserDAO userDAO;
     private final String API_KEY = "AIzaSyAm43w75goT3wWIxFoxA1i7MdsV_Q8CGSY";
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocationResource.class);
 
     public MessageResource(UserDAO userDAO) {
         this.userDAO = userDAO;
