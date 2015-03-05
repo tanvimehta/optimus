@@ -1,10 +1,7 @@
 package com.uplan.service;
 
 import com.uplan.core.*;
-import com.uplan.db.FriendDAO;
-import com.uplan.db.LocationDAO;
-import com.uplan.db.ResetPasswordTokenDAO;
-import com.uplan.db.UserDAO;
+import com.uplan.db.*;
 import com.uplan.health.TemplateHealthCheck;
 import com.uplan.resources.*;
 import io.dropwizard.Application;
@@ -25,7 +22,8 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
             User.class,
             ResetPasswordToken.class,
             Friend.class,
-            Location.class) {
+            Location.class,
+            Event.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(UPlanConfiguration uPlanConfiguration) {
             return uPlanConfiguration.getDataSourceFactory();
@@ -52,6 +50,7 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
         final ResetPasswordTokenDAO resetPasswordTokenDAO = new ResetPasswordTokenDAO(hibernate.getSessionFactory());
         final FriendDAO friendDAO = new FriendDAO(hibernate.getSessionFactory());
         final LocationDAO locationDAO = new LocationDAO(hibernate.getSessionFactory());
+        final EventDAO eventDAO = new EventDAO(hibernate.getSessionFactory());
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
         environment.jersey().register(new HelloWorldResource(template));
@@ -59,6 +58,7 @@ public class UPlanApplication extends Application<UPlanConfiguration> {
         environment.jersey().register(new FriendResource(userDAO, friendDAO));
         environment.jersey().register(new LocationResource(userDAO, locationDAO));
         environment.jersey().register(new MessageResource(userDAO));
+        environment.jersey().register(new EventResource(userDAO, eventDAO));
 
     }
 }

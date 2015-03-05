@@ -89,11 +89,12 @@ public class LocationResource {
         POST2GCM.post(API_KEY, content);
 
         // Remove this once the request handling is fixed
-        Location location = new Location();
-        location.setBuilding("Bahen");
-        location.setFloor(1);
-        location.setX_coordinate(123);
-        location.setY_coordinate(123);
+//        Location location = new Location();
+//        location.setBuilding("Bahen");
+//        location.setFloor(1);
+//        location.setX_coordinate(123);
+//        location.setY_coordinate(123);
+        Location location = locationDAO.getLocation(friend.getUser_id());
         return location;
     }
 

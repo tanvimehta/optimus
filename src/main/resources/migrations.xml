@@ -81,6 +81,33 @@
             </column>
         </createTable>
 
+        <createTable tableName="event">
+            <column name="event_user_pair" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="event_id" type="bigint">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="user" type="bigint">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="creator" type="bigint">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="response" type="bigint">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="from_time" type="float">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="to_time" type="float">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="location" type="varchar(100)">
+                <constraints unique="false" nullable="true"/>
+            </column>
+        </createTable>
+
         <loadData encoding="UTF-8" file="ba_3.csv" tableName="resources"/>
         <loadData encoding="UTF-8" file="users.csv" tableName="users"/>
         <loadData encoding="UTF-8" file="friends.csv" tableName="friends"/>
