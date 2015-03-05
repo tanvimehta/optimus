@@ -65,6 +65,9 @@ public class Event  {
     @Column(name="location", nullable = false)
     private String location;
 
+    @Column(name="name", nullable = false)
+    private String name;
+
 
     public long getEvent_id() {
         return event_id;
@@ -120,5 +123,13 @@ public class Event  {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

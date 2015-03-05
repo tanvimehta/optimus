@@ -106,6 +106,9 @@
             <column name="location" type="varchar(100)">
                 <constraints unique="false" nullable="true"/>
             </column>
+            <column name="name" type="varchar(100)">
+                <constraints unique="false" nullable="true"/>
+            </column>
         </createTable>
 
         <loadData encoding="UTF-8" file="ba_3.csv" tableName="resources"/>

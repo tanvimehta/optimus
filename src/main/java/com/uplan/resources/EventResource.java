@@ -46,7 +46,8 @@ public class EventResource {
                                      @QueryParam("email") String email,
                                      @QueryParam("from_time") String from_time,
                                      @QueryParam("to_time") String to_time,
-                                     @QueryParam("location") String location) {
+                                     @QueryParam("location") String location,
+                                     @QueryParam("name") String name) {
         Optional<Event> eventOptional = Optional.absent();
         User user = userDAO.getUserByEmail(email);
         if (user == null) {
@@ -60,6 +61,7 @@ public class EventResource {
         event.setFrom_time(Float.parseFloat(from_time));
         event.setTo_time(Float.parseFloat(to_time));
         event.setLocation(location);
+        event.setName(name);
         event.setResponse(true);
         event.setUser(user.getUser_id());
         eventOptional = Optional.fromNullable(eventDAO.persistEvent(event));
@@ -79,12 +81,13 @@ public class EventResource {
             tempEvent.setFrom_time(Float.parseFloat(from_time));
             tempEvent.setTo_time(Float.parseFloat(to_time));
             tempEvent.setLocation(location);
+            tempEvent.setName(name);
             tempEvent.setResponse(false);
             tempEventOptional = Optional.fromNullable(eventDAO.persistEvent(tempEvent));
 
             Content content = new Content();
             content.addRegId(tmpUser.getReg_id());
-            content.createData("getResponse", friend);
+            content.createData("getResponse", name + ";" + user.getFirstName() + ";" + EVENT_ID);
             POST2GCM.post(API_KEY, content);
         }
 
