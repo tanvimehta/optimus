@@ -26,11 +26,6 @@
             <name>Spring Releases</name>
             <url>https://repo.spring.io/libs-release</url>
         </repository>
-        <!--<repository>-->
-            <!--<id>neo4j</id>-->
-            <!--<name>Neo4j</name>-->
-            <!--<url>http://m2.neo4j.org/</url>-->
-        <!--</repository>-->
     </repositories>
 
     <pluginRepositories>
@@ -132,71 +127,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.data</groupId>-->
-            <!--<artifactId>spring-data-neo4j</artifactId>-->
-            <!--<version>3.2.1.RELEASE</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>spring-beans</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                    <!--<artifactId>jcl-over-slf4j</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>spring-expression</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.neo4j</groupId>-->
-                    <!--<artifactId>neo4j-lucene-index</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>spring-context</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>spring-core</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.scala-lang</groupId>-->
-                    <!--<artifactId>scala-library</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.neo4j</groupId>-->
-                    <!--<artifactId>neo4j-graph-matching</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>net.sf.opencsv</groupId>-->
-                    <!--<artifactId>opencsv</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.neo4j</groupId>-->
-                    <!--<artifactId>neo4j-kernel</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.neo4j</groupId>-->
-                    <!--<artifactId>neo4j-graph-algo</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.10.3</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-graph-matching</artifactId>-->
-            <!--<version>2.1.6</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>net.sf.opencsv</groupId>
             <artifactId>opencsv</artifactId>
@@ -222,21 +157,6 @@
             <artifactId>spring-core</artifactId>
             <version>4.1.4.RELEASE</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-graph-algo</artifactId>-->
-            <!--<version>2.1.6</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-lucene-index</artifactId>-->
-            <!--<version>2.1.6</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-kernel</artifactId>-->
-            <!--<version>2.1.6</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -326,7 +246,6 @@
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.uplan.service.UPlanApplication</mainClass>
-                                    <!--<mainClass>com.uplan.neo4j.ResourceApplication</mainClass>-->
                                 </transformer>
                             </transformers>
                         </configuration>

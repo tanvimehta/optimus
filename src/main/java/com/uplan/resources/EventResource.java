@@ -69,7 +69,6 @@ public class EventResource {
         /* Add each invitee with default response of false */
         String friend_list[] = friends.split(";");
         for (String friend : friend_list) {
-            Optional<Event> tempEventOptional = Optional.absent();
             Event tempEvent = new Event();
             User tmpUser = userDAO.getUserByEmail(friend);
             if (tmpUser == null) {
@@ -83,7 +82,7 @@ public class EventResource {
             tempEvent.setLocation(location);
             tempEvent.setName(name);
             tempEvent.setResponse(false);
-            tempEventOptional = Optional.fromNullable(eventDAO.persistEvent(tempEvent));
+            Optional.fromNullable(eventDAO.persistEvent(tempEvent));
 
             Content content = new Content();
             content.addRegId(tmpUser.getReg_id());
@@ -112,17 +111,9 @@ public class EventResource {
     @Timed
     @UnitOfWork
     @Path("getInvitees")
-    public List<User> getInvitees(@QueryParam("event_id") String event_id) {
+    public List<Event> getInvitees(@QueryParam("event_id") String event_id) {
         Long eventId = Long.parseLong(event_id);
-        List<Event> events = eventDAO.getEventsByEventId(eventId);
-        List<User> invitees = new ArrayList<User>();
-        for (Event event : events) {
-            User invitee = userDAO.getUserById(event.getUser());
-            if (invitee != null) {
-                invitees.add(invitee);
-            }
-        }
-        return invitees;
+        return eventDAO.getEventsByEventId(eventId);
     }
 
     @GET
