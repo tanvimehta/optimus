@@ -84,7 +84,7 @@ public class EventResource {
 
             Content content = new Content();
             content.addRegId(tmpUser.getReg_id());
-            content.createData("getLocation", friend);
+            content.createData("getResponse", friend);
             POST2GCM.post(API_KEY, content);
         }
 
