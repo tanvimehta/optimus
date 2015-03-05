@@ -41,8 +41,8 @@ public class LocationResource {
     public boolean addLocation(@QueryParam("email") String email,
                              @QueryParam("floor") long floor,
                              @QueryParam("building") String building,
-                             @QueryParam("x") long xCoord,
-                             @QueryParam("y") long yCoord) {
+                             @QueryParam("x") float xCoord,
+                             @QueryParam("y") float yCoord) {
         long userId = userDAO.getUserByEmail(email).getUser_id();
 
         if (userId != 0 && locationDAO.getLocation(userId) != null) {
@@ -78,9 +78,10 @@ public class LocationResource {
             @QueryParam("friendEmail") String friendEmail) {
         User friend = userDAO.getUserByEmail(friendEmail);
         if (!friend.isLoc_permission()) {
+            System.out.println("Allows");
             return null;
         }
-
+        System.out.println("Allows");
         Content content = new Content();
         content.addRegId(friend.getReg_id());
 //        content.addRegId("APA91bHKmGv67k1xO7dnwIpdtL6zQ5Vt55-yrklQ8bMySG1F1-tQ5J9CIQHCNWGirUfNfUHkcMunQ_5U_PdPxQWBsTNeV5-50DI847EA4P9vVkNAjo08hsrbyQYuKrqe5hx8JHq8n8eEH_waAiEBUbhbTZ00z33OW2IvMWYS4OkUBNfirEKO7oM");
@@ -116,7 +117,7 @@ public class LocationResource {
 
         long userId = friend.getUser_id();
         if (userId != 0 && locationDAO.getLocation(userId) != null) {
-            locationDAO.updateLocation(Long.parseLong(floor), building, Long.parseLong(xCoord), Long.parseLong(yCoord), userId);
+            locationDAO.updateLocation(Long.parseLong(floor), building, Float.parseFloat(xCoord), Float.parseFloat(yCoord), userId);
         } else if (userId != 0){
             Location location = new Location();
             location.setFloor(Long.parseLong(floor));

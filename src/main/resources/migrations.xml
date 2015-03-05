@@ -73,10 +73,16 @@
             <column name="floor" type="bigint">
                 <constraints unique="false" nullable="true"/>
             </column>
-            <column name="x_coordinate" type="bigint">
+            <column name="x_coordinate" type="float">
                 <constraints unique="false" nullable="true"/>
             </column>
-            <column name="y_coordinate" type="bigint">
+            <column name="y_coordinate" type="float">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="accuracy" type="float">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="bearing" type="float">
                 <constraints unique="false" nullable="true"/>
             </column>
         </createTable>

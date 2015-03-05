@@ -30,10 +30,16 @@ public class Location {
     private long floor;
 
     @Column(name="x_coordinate", nullable = true)
-    private long x_coordinate;
+    private float x_coordinate;
 
     @Column(name="y_coordinate", nullable = true)
-    private long y_coordinate;
+    private float y_coordinate;
+
+    @Column(name="accuracy", nullable = true)
+    private float accuracy;
+
+    @Column(name="bearing", nullable = true)
+    private float bearing;
 
     public long getUser_id() {
         return user_id;
@@ -59,19 +65,35 @@ public class Location {
         this.floor = floor;
     }
 
-    public long getX_coordinate() {
+    public float getX_coordinate() {
         return x_coordinate;
     }
 
-    public void setX_coordinate(long x_coordinate) {
-        this.x_coordinate = x_coordinate;
-    }
-
-    public long getY_coordinate() {
+    public float getY_coordinate() {
         return y_coordinate;
     }
 
-    public void setY_coordinate(long y_coordinate) {
+    public void setX_coordinate(float x_coordinate) {
+        this.x_coordinate = x_coordinate;
+    }
+
+    public void setY_coordinate(float y_coordinate) {
         this.y_coordinate = y_coordinate;
+    }
+
+    public float getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(float accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public float getBearing() {
+        return bearing;
+    }
+
+    public void setBearing(float bearing) {
+        this.bearing = bearing;
     }
 }
