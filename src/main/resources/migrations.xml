@@ -64,8 +64,11 @@
         </createTable>
 
         <createTable tableName="location">
-            <column name="user_id" type="bigint" autoIncrement="true">
+            <column name="location_id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints unique="false" nullable="true"/>
             </column>
             <column name="building" type="varchar(100)">
                 <constraints unique="false" nullable="true"/>

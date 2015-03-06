@@ -21,6 +21,9 @@ import javax.persistence.*;
 public class Location {
 
     @Id
+    private long location_id;
+
+    @Column(name="user_id", nullable = true)
     private long user_id;
 
     @Column(name="building", nullable = true)
