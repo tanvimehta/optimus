@@ -4,23 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import com.uplan.core.Content;
 import com.uplan.core.Event;
-import com.uplan.core.ResetPasswordToken;
 import com.uplan.core.User;
 import com.uplan.db.EventDAO;
 import com.uplan.db.UserDAO;
 import com.uplan.service.POST2GCM;
 import io.dropwizard.hibernate.UnitOfWork;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.StringUtils;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by siddharthzaveri on 15-03-04.
@@ -44,6 +39,8 @@ public class EventResource {
     @Path("create")
     public Optional<Event> createEvent(@QueryParam("friends") String friends,
                                      @QueryParam("email") String email,
+                                     @QueryParam("from_date") String from_date,
+                                     @QueryParam("to_date") String to_date,
                                      @QueryParam("from_time") String from_time,
                                      @QueryParam("to_time") String to_time,
                                      @QueryParam("location") String location,
@@ -58,6 +55,8 @@ public class EventResource {
         Event event = new Event();
         event.setCreator(true);
         event.setEvent_id(EVENT_ID);
+        event.setFrom_date(from_date);
+        event.setTo_date(to_date);
         event.setFrom_time(Float.parseFloat(from_time));
         event.setTo_time(Float.parseFloat(to_time));
         event.setLocation(location);
@@ -77,6 +76,8 @@ public class EventResource {
             tempEvent.setUser(tmpUser.getUser_id());
             tempEvent.setCreator(false);
             tempEvent.setEvent_id(EVENT_ID);
+            tempEvent.setFrom_date(from_date);
+            tempEvent.setTo_date(to_date);
             tempEvent.setFrom_time(Float.parseFloat(from_time));
             tempEvent.setTo_time(Float.parseFloat(to_time));
             tempEvent.setLocation(location);

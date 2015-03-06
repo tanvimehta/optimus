@@ -68,6 +68,11 @@ public class Event  {
     @Column(name="name", nullable = false)
     private String name;
 
+    @Column(name="from_date", nullable = false)
+    private String from_date;
+
+    @Column(name="to_date", nullable = false)
+    private String to_date;
 
     public long getEvent_id() {
         return event_id;
@@ -131,5 +136,21 @@ public class Event  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFrom_date() {
+        return from_date;
+    }
+
+    public void setFrom_date(String from_date) {
+        this.from_date = from_date;
+    }
+
+    public String getTo_date() {
+        return to_date;
+    }
+
+    public void setTo_date(String to_date) {
+        this.to_date = to_date;
     }
 }

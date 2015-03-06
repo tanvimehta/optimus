@@ -97,6 +97,12 @@
             <column name="response" type="bigint">
                 <constraints unique="false" nullable="true"/>
             </column>
+            <column name="from_date" type="varchar(100)">
+                <constraints unique="false" nullable="true"/>
+            </column>
+            <column name="to_date" type="varchar(100)">
+                <constraints unique="false" nullable="true"/>
+            </column>
             <column name="from_time" type="float">
                 <constraints unique="false" nullable="true"/>
             </column>
