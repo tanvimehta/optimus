@@ -24,10 +24,10 @@ public class LocationDAO extends AbstractDAO<Location> {
                 setBigInteger("user_id", BigInteger.valueOf(userId)));
     }
 
-    public void updateLocation(long floor, String building, long x, long y, long userId) {
+    public void updateLocation(long floor, String building, float x, float y, long userId) {
         namedQuery("com.uplan.core.Location.updateLocation").setBigInteger("floor", BigInteger.valueOf(floor)).
-                setString("building", building).setBigInteger("x_coordinate", BigInteger.valueOf(x)).
-                setBigInteger("y_coordinate", BigInteger.valueOf(y)).setBigInteger("user_id", BigInteger.valueOf(userId)).
+                setString("building", building).setFloat("x_coordinate", x).
+                setFloat("y_coordinate", y).setBigInteger("user_id", BigInteger.valueOf(userId)).
                 executeUpdate();
     }
 }
