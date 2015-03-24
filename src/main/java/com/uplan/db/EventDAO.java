@@ -28,6 +28,13 @@ public class EventDAO extends AbstractDAO<Event> {
         return events;
     }
 
+    public Event getEventsByEventUserAndId(long user, long event_id) {
+        Event event = uniqueResult(namedQuery("com.uplan.core.Event.getEventsByUserAndId")
+                .setBigInteger("event_id", BigInteger.valueOf(event_id))
+                .setBigInteger("user", BigInteger.valueOf(user)));
+        return event;
+    }
+
     public List<Event> getAllEvents() {
         List<Event> events = list(namedQuery("com.uplan.core.Event.getAllEvents"));
         return events;
@@ -35,6 +42,12 @@ public class EventDAO extends AbstractDAO<Event> {
 
     public void deleteEventById(long event_id) {
         namedQuery("com.uplan.core.Event.deleteEventById").setBigInteger("event_id", BigInteger.valueOf(event_id)).executeUpdate();
+    }
+
+    public void deleteEventByIdAndUser(long event_id, long user) {
+        namedQuery("com.uplan.core.Event.deleteEventByIdAndUser").setBigInteger("event_id", BigInteger.valueOf(event_id)).
+                setBigInteger("user", BigInteger.valueOf(user)).
+                executeUpdate();
     }
 
     public void setResponse(long response, long event_id, long user) {

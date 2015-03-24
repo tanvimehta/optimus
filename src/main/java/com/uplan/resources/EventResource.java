@@ -121,9 +121,39 @@ public class EventResource {
     @Timed
     @UnitOfWork
     @Path("deleteEvent")
-    public Boolean deleteEvent(@QueryParam("event_id") String event_id) {
+    public Boolean deleteEvent(@QueryParam("event_id") String event_id,
+                               @QueryParam("event_id") String user_s) {
         Long eventId = Long.parseLong(event_id);
-        eventDAO.deleteEventById(eventId);
+        Long user = Long.parseLong(user_s);
+        Event event = eventDAO.getEventsByEventUserAndId(user,eventId);
+        if (event.getCreator() == true) {
+            User creator = userDAO.getUserById(event.getUser());
+            List<Event> allInvitees = eventDAO.getEventsByEventId(eventId);
+            for (Event e : allInvitees) {
+                if (e.getUser() != user) {
+                    User tmpUser = userDAO.getUserById(e.getUser());
+                    Content content = new Content();
+                    content.addRegId(tmpUser.getReg_id());
+                    content.createData("eventCancelled", e.getName() + ";" + creator.getFirstName() + ";" + e.getEvent_id());
+                    POST2GCM.post(API_KEY, content);
+                }
+            }
+            eventDAO.deleteEventById(eventId);
+        } else {
+            eventDAO.deleteEventByIdAndUser(eventId, user);
+            User current = userDAO.getUserById(user);
+            List<Event> allInvitees = eventDAO.getEventsByEventId(eventId);
+            for (Event e : allInvitees) {
+                if (e.getCreator() == true) {
+                    User tmpUser = userDAO.getUserById(e.getUser());
+                    Content content = new Content();
+                    content.addRegId(tmpUser.getReg_id());
+                    content.createData("userNotAttending", e.getName() + ";" + current.getFirstName() + ";" + e.getEvent_id());
+                    POST2GCM.post(API_KEY, content);
+                }
+            }
+
+        }
         return true;
     }
 

@@ -23,8 +23,16 @@ import java.util.ArrayList;
                 query = "DELETE FROM Event where event_id = :event_id"
         ),
         @NamedQuery(
+                name = "com.uplan.core.Event.deleteEventByIdAndUser",
+                query = "DELETE FROM Event where event_id = :event_id and user = :user"
+        ),
+        @NamedQuery(
                 name = "com.uplan.core.Event.getEventsByUser",
                 query = "SELECT event FROM Event event where user = :user"
+        ),
+        @NamedQuery(
+                name = "com.uplan.core.Event.getEventsByUserAndEvent",
+                query = "SELECT event FROM Event event where user = :user and event_id = :event_id"
         ),
         @NamedQuery(
                 name = "com.uplan.core.Event.setResponse",
