@@ -122,7 +122,7 @@ public class EventResource {
     @UnitOfWork
     @Path("deleteEvent")
     public Boolean deleteEvent(@QueryParam("event_id") String event_id,
-                               @QueryParam("event_id") String user_s) {
+                               @QueryParam("user") String user_s) {
         Long eventId = Long.parseLong(event_id);
         Long user = Long.parseLong(user_s);
         Event event = eventDAO.getEventsByEventUserAndId(user,eventId);

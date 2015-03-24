@@ -31,7 +31,7 @@ import java.util.ArrayList;
                 query = "SELECT event FROM Event event where user = :user"
         ),
         @NamedQuery(
-                name = "com.uplan.core.Event.getEventsByUserAndEvent",
+                name = "com.uplan.core.Event.getEventsByUserAndId",
                 query = "SELECT event FROM Event event where user = :user and event_id = :event_id"
         ),
         @NamedQuery(
