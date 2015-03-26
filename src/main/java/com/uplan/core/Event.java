@@ -62,7 +62,7 @@ public class Event  {
     private Boolean creator;
 
     @Column(name="response", nullable = false)
-    private Boolean response;
+    private long response;
 
     @Column(name="from_time", nullable = false)
     private float from_time; // Format hh.mm
@@ -106,11 +106,11 @@ public class Event  {
         this.creator = creator;
     }
 
-    public Boolean getResponse() {
+    public long getResponse() {
         return response;
     }
 
-    public void setResponse(Boolean response) {
+    public void setResponse(long response) {
         this.response = response;
     }
 

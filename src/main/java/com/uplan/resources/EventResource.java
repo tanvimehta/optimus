@@ -25,8 +25,11 @@ import java.util.List;
 public class EventResource {
     private UserDAO userDAO;
     private EventDAO eventDAO;
-    static long EVENT_ID = 0;
+    //static long EVENT_ID = 0;
     private final String API_KEY = "AIzaSyAm43w75goT3wWIxFoxA1i7MdsV_Q8CGSY";
+    private final long NO_RESPONSE = 0;
+    private final long DECLINED = -1;
+    private final long ACCEPTED = 1;
 
     public EventResource(UserDAO userDAO, EventDAO eventDAO) {
         this.userDAO = userDAO;
@@ -50,18 +53,25 @@ public class EventResource {
         if (user == null) {
             return null;
         }
-        EVENT_ID++;
+        /* Get unused event id */
+        long eventId = 0;
+        List<Event> eForId = eventDAO.getEventsByEventId(eventId);
+        while ((null != eForId) && (!eForId.isEmpty())) {
+            eventId++;
+            eForId = eventDAO.getEventsByEventId(eventId);
+        }
+        //EVENT_ID++;
         /* Add creator */
         Event event = new Event();
         event.setCreator(true);
-        event.setEvent_id(EVENT_ID);
+        event.setEvent_id(eventId);
         event.setFrom_date(from_date);
         event.setTo_date(to_date);
         event.setFrom_time(Float.parseFloat(from_time));
         event.setTo_time(Float.parseFloat(to_time));
         event.setLocation(location);
         event.setName(name);
-        event.setResponse(true);
+        event.setResponse(ACCEPTED);
         event.setUser(user.getUser_id());
         eventOptional = Optional.fromNullable(eventDAO.persistEvent(event));
 
@@ -75,19 +85,19 @@ public class EventResource {
             }
             tempEvent.setUser(tmpUser.getUser_id());
             tempEvent.setCreator(false);
-            tempEvent.setEvent_id(EVENT_ID);
+            tempEvent.setEvent_id(eventId);
             tempEvent.setFrom_date(from_date);
             tempEvent.setTo_date(to_date);
             tempEvent.setFrom_time(Float.parseFloat(from_time));
             tempEvent.setTo_time(Float.parseFloat(to_time));
             tempEvent.setLocation(location);
             tempEvent.setName(name);
-            tempEvent.setResponse(false);
+            tempEvent.setResponse(NO_RESPONSE);
             Optional.fromNullable(eventDAO.persistEvent(tempEvent));
 
             Content content = new Content();
             content.addRegId(tmpUser.getReg_id());
-            content.createData("getResponse", name + ";" + user.getFirstName() + ";" + EVENT_ID);
+            content.createData("getResponse", name + ";" + user.getFirstName() + ";" + eventId);
             POST2GCM.post(API_KEY, content);
         }
 
@@ -166,9 +176,9 @@ public class EventResource {
                                @QueryParam("email") String email,
                                @QueryParam("response") String response) {
         Long eventId = Long.parseLong(event_id);
-        long responseLong = 0;
+        long responseLong = DECLINED;
         if (response.equals("true")) {
-            responseLong = 1;
+            responseLong = ACCEPTED;
         }
 
         User user = userDAO.getUserByEmail(email);
